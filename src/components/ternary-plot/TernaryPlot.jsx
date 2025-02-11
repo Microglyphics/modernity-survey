@@ -105,6 +105,41 @@ const TernaryPlot = ({ analysisData, questions, responses }) => {
         />
     );
 
+    // Labels with tested positions
+    elements.push(
+        // PreModern label (bottom)
+        <text 
+            key="premodern-label" 
+            x={(vertices.left.x + vertices.right.x) - 20} 
+            y={vertices.left.y + 40} 
+            textAnchor="end"
+        >
+            PreModern ▶
+        </text>,
+        
+        // PostModern label (left side)
+        <text 
+            key="postmodern-label"
+            x={margin.left + LABEL_POSITIONS.postmodern.x}
+            y={height - margin.bottom + LABEL_POSITIONS.postmodern.y}
+            textAnchor="end"
+            transform={`rotate(${LABEL_POSITIONS.postmodern.r} ${margin.left + LABEL_POSITIONS.postmodern.x} ${height - margin.bottom + LABEL_POSITIONS.postmodern.y})`}
+        >
+            ◀ Postmodern
+        </text>,
+
+        // Modern label (right side)
+        <text 
+            key="modern-label"
+            x={vertices.right.x + LABEL_POSITIONS.modern.x}
+            y={height - margin.bottom + LABEL_POSITIONS.modern.y}
+            textAnchor="end"
+            transform={`rotate(${LABEL_POSITIONS.modern.r} ${vertices.right.x + LABEL_POSITIONS.modern.x} ${height - margin.bottom + LABEL_POSITIONS.modern.y})`}
+        >
+            ◀ Modern
+        </text>
+    );
+
     // Add tick marks for each side
     for (let i = 0; i <= 10; i++) {
         const ratio = i / 10;
@@ -132,8 +167,8 @@ const TernaryPlot = ({ analysisData, questions, responses }) => {
                 key={`left-tick-${i}`}
                 x1={leftX}
                 y1={leftY}
-                x2={leftX - leftTickLength * Math.sqrt(3)/2}  // cos(60°)
-                y2={leftY + leftTickLength * 0.5}            // sin(60°)
+                x2={leftX - leftTickLength * Math.sqrt(3)/2}
+                y2={leftY + leftTickLength * 0.5}
                 stroke="black"
                 strokeWidth="1"
             />
